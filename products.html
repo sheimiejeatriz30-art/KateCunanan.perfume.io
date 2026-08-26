@@ -1,0 +1,630 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PRODUCTS-CUNANAN</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:pink;
+}
+
+/* Navigation */
+nav{
+    background:darkred;
+    color:white;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 40px;
+}
+
+nav h2{
+    font-size:28px;
+}
+
+nav ul{
+    list-style:none;
+    display:flex;
+}
+
+nav ul li{
+    margin-left:25px;
+}
+
+nav ul li a{
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+nav ul li a:hover{
+    color:#DB6551 ;
+}
+
+
+/* PRODUCTS */
+
+.products-section {
+    max-width: 1100px;
+    margin: 60px auto;
+    padding: 20px;
+}
+
+.products-section h2 {
+    text-align: center;
+    font-family: Georgia, serif;
+    font-size: 38px;
+    color: #4b3425;
+}
+
+.subtitle {
+    text-align: center;
+    color: #777;
+    margin-bottom: 35px;
+}
+
+.products {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.product {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px #00000015;
+    transition: .3s;
+}
+
+.product:hover {
+    transform: translateY(-6px);
+}
+
+.product img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    display: block;
+}
+
+.product-info {
+    padding: 18px;
+    text-align: center;
+}
+
+.product-info h3 {
+    font-family: Georgia, serif;
+    color: #4b3425;
+}
+
+.product-info p {
+    font-size: 19px;
+    font-weight: bold;
+    margin: 10px;
+}
+
+.product-info button {
+    width: 100%;
+    padding: 11px;
+    border: none;
+    border-radius: 6px;
+    background: #4b3425;
+    color: white;
+    cursor: pointer;
+}
+
+.product-info button:hover {
+    background: #a47c55;
+}
+/* About */
+
+.about{
+    background:white;
+    text-align:center;
+    padding:50px;
+}
+
+.about h2{
+    color:hotpink;
+    margin-bottom:15px;
+}
+
+/* Contact */
+
+.contact{
+    padding:40px;
+    text-align:center;
+}
+
+.contact h2{
+    color:#4a2c2a;
+    margin-bottom:10px;
+}
+
+/* Footer */
+
+footer{
+    background:pink;
+    color:white;
+    text-align:center;
+    padding:15px;
+}
+
+
+/* CART */
+
+.cart {
+    position: fixed;
+    right: -400px;
+    top: 0;
+
+    width: 380px;
+    max-width: 100%;
+    height: 100vh;
+
+    background: white;
+    z-index: 9999;
+
+    box-shadow: -5px 0 20px #00000025;
+
+    transition: .3s;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.cart.open {
+    right: 0;
+}
+
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 20px;
+
+    border-bottom: 1px solid #ddd;
+}
+
+.cart-header button {
+    border: none;
+    background: none;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+#cartItems {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.cart-item {
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.cart-item h4 {
+    margin-bottom: 5px;
+}
+
+.cart-item button {
+    border: none;
+    background: #eee;
+    padding: 5px 9px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.remove {
+    color: #b33;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.empty {
+    text-align: center;
+    color: #888;
+}
+
+.cart-bottom {
+    padding: 20px;
+    border-top: 1px solid #ddd;
+}
+
+.cart-bottom h3 {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.checkout {
+    width: 100%;
+    padding: 13px;
+    border: none;
+    border-radius: 6px;
+    background: #4b3425;
+    color: white;
+    cursor: pointer;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 800px) {
+
+    .products {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media (max-width: 500px) {
+
+    .products {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+</style>
+
+
+<script>
+
+let cart = [];
+
+
+/* ADD TO CART */
+
+function addToCart(name, price) {
+
+    let existing = cart.find(
+        item => item.name === name
+    );
+
+    if (existing) {
+
+        existing.quantity++;
+
+    } else {
+
+        cart.push({
+            name: name,
+            price: price,
+            quantity: 1
+        });
+
+    }
+
+    updateCart();
+    openCart();
+
+}
+
+
+/* UPDATE CART */
+
+function updateCart() {
+
+    const cartItems =
+        document.getElementById("cartItems");
+
+    const cartTotal =
+        document.getElementById("cartTotal");
+
+    cartItems.innerHTML = "";
+
+    let total = 0;
+
+
+    if (cart.length === 0) {
+
+        cartItems.innerHTML =
+            `<p class="empty">
+                Your cart is empty.
+            </p>`;
+
+    }
+
+
+    cart.forEach((item, index) => {
+
+        total +=
+            item.price * item.quantity;
+
+        cartItems.innerHTML += `
+
+            <div class="cart-item">
+
+                <h4>${item.name}</h4>
+
+                <p>
+                    ₱${item.price.toLocaleString()}
+                </p>
+
+                <button
+                    onclick="changeQuantity(${index}, -1)">
+                    −
+                </button>
+
+                ${item.quantity}
+
+                <button
+                    onclick="changeQuantity(${index}, 1)">
+                    +
+                </button>
+
+                <div
+                    class="remove"
+                    onclick="removeItem(${index})">
+
+                    Remove
+
+                </div>
+
+            </div>
+
+        `;
+
+    });
+
+
+    cartTotal.textContent =
+        total.toLocaleString();
+
+}
+
+
+/* CHANGE QUANTITY */
+
+function changeQuantity(index, amount) {
+
+    cart[index].quantity += amount;
+
+    if (cart[index].quantity <= 0) {
+        cart.splice(index, 1);
+    }
+
+    updateCart();
+
+}
+
+
+/* REMOVE */
+
+function removeItem(index) {
+
+    cart.splice(index, 1);
+
+    updateCart();
+
+}
+
+
+/* OPEN CART */
+
+function openCart() {
+
+    document
+        .querySelector(".cart")
+        .classList.add("open");
+
+}
+
+
+/* CLOSE CART */
+
+function closeCart() {
+
+    document
+        .querySelector(".cart")
+        .classList.remove("open");
+
+}
+
+
+/* CHECKOUT */
+
+function checkout() {
+
+    if (cart.length === 0) {
+
+        alert("Your cart is empty!");
+
+        return;
+
+    }
+
+    alert(
+        "Thank you for shopping with us! ✨"
+    );
+
+}
+
+</script>
+
+<nav>
+  
+     
+<i><h2>Jiewel's</h2></i>
+
+<ul>
+<li><a href="D:\kate\CUNANAN PROJECT\index.html">Home</a></li>
+<li><a href="D:\kate\CUNANAN PROJECT\products.html">Products</a></li>
+<li><a href="D:\kate\CUNANAN PROJECT\about.html">About</a></li>
+<li><a href="D:\kate\CUNANAN PROJECT\contact.html">Contact</a></li>
+</ul>
+
+</nav>
+<!-- PRODUCTS + ADD TO CART -->
+
+<section class="products-section">
+
+    <h2>Our Perfumes</h2>
+    <p class="subtitle">Choose your favorite fragrance.</p>
+
+    <div class="products">
+
+        <!-- PRODUCT 1 -->
+        <div class="product">
+            <img src="D:\kate\ffd3cfa0-a638-4818-8780-42e14572479c.jpg" alt="Golden Bloom">
+            <div class="product-info">
+                <h3>Golden Bloom</h3>
+                <i><p>A warm and luxurious scent featuring amber, vanilla, and subtle spices.</p></i>
+                <p>₱8,999</p>
+                <button onclick="addToCart('Golden Bloom', 8999)">
+                    Add to Cart
+                </button>
+            </div>
+        </div>
+
+        <!-- PRODUCT 2 -->
+        <div class="product">
+            <img src="D:\kate\ee03cf8b-7324-4a16-bff0-235e53ea7a31.jpg" alt="Rose Élan">
+            <div class="product-info">
+                <h3>Rose Élan</h3>
+                <i><p>A romantic fragrance combining rich roses with smooth and warm undertones.</p></i>
+                <p>₱5,999</p>
+                <button onclick="addToCart('Rose Élan', 5999)">
+                    Add to Cart
+                </button>
+            </div>
+        </div>
+
+        <!-- PRODUCT 3 -->
+        <div class="product">
+            <img src="D:\kate\cac18cd8-ed0f-4816-8c14-bd13498c2ecc.jpg" alt="Forest Mist">
+            <div class="product-info">
+                <h3>Forest Mist</h3>
+                <i><p>A graceful floral perfume with fresh jasmine and a light, sweet aroma.</p></i>
+                <p>₱4,229</p>
+                <button onclick="addToCart('Forest Mist', 4229)">
+                    Add to Cart
+                </button>
+            </div>
+        </div>
+
+        <!-- PRODUCT 4 -->
+        <div class="product">
+            <img src="D:\kate\147d1b9f-e32b-4347-b936-7519722378f2.jpg" alt="Velvet Night">
+            <div class="product-info">
+                <h3>Velvet Night</h3>
+                <i><p>A calming fragrance with delicate lavender and soft powdery notes.</p></i>
+                <p>₱9,999</p>
+                <button onclick="addToCart('Velvet Night', 9999)">
+                    Add to Cart
+                </button>
+            </div>
+        </div>
+
+        <!-- PRODUCT 5 -->
+        <div class="product">
+            <img src="D:\kate\41375c4c-e21c-4842-80a3-e52055c405f6.jpg" alt="Amber Soleil">
+            <div class="product-info">
+                <h3>Amber Soleil</h3>
+                <i><p>A sweet and refreshing perfume with juicy peach and delicate flowers.</p></i>
+                <p>₱8,774</p>
+                <button onclick="addToCart('Amber Soleil', 8774)">
+                    Add to Cart
+                </button>
+            </div>
+        </div>
+
+        <!-- PRODUCT 6 -->
+        <div class="product">
+            <img src="D:\kate\3f0d64e2-7beb-4d5d-9452-751701a9bf6e.jpg" alt="Ocean Air">
+            <div class="product-info">
+                <h3>Ocean Air</h3>
+                <i><p>A fresh, clean fragrance inspired by cool ocean air and gentle waves.</p></i>
+                <p>₱7,200</p>
+                <button onclick="addToCart('Ocean Air', 7200)">
+                    Add to Cart
+                </button>
+            </div>
+
+        </div>
+
+        <!-- PRODUCT 7 -->
+        <div class="product">
+            <img src="D:\kate\922142c1-055d-4560-826d-c08fc06544cc.jpg" alt="Rose Bloom">
+            <div class="product-info">
+                <h3>Rose Bloom</h3>
+                <i><p>A soft floral scent with fresh roses and a sweet, elegant finish.</p></i>
+                <p>₱3,500</p>
+                <button onclick="addToCart('Rose Bloom', 3500)">
+                    Add to Cart
+                </button>
+            </div>
+        </div>
+
+        <!-- PRODUCT 8 -->
+        <div class="product">
+            <img src="D:\kate\36e08b0e-b092-484c-ba89-4cfad609f68b.jpg" alt="Sweet Vanilla">
+            <div class="product-info">
+                <h3>Sweet Vanilla</h3>
+                <i><p>A soft floral scent with fresh roses and a sweet, elegant finish.</p></i>
+                <p>₱7,500</p>
+                <button onclick="addToCart('Sweet Vanilla', 7500)">
+                    Add to Cart
+                </button>
+            </div>
+        </div>
+
+        <!-- PRODUCT 9 -->
+        <div class="product">
+            <img src="D:\kate\0a4075b8-2390-4ace-8f08-033b9cabb0d0.jpg" alt="Midnight Elegance">
+            <div class="product-info">
+                <h3>Midnight Elegance</h3>
+                <i><p>A mysterious fragrance with warm vanilla, soft musk, and rich floral notes.</p></i>
+                <p>₱6,999</p>
+                <button onclick="addToCart('Midnight Elegance', 6999)">
+                    Add to Cart
+                </button>
+            </div>
+
+    </div>
+
+</section>
+
+
+<!-- CART -->
+
+<div class="cart">
+
+    <div class="cart-header">
+        <h2>🛒 Your Cart</h2>
+        <button onclick="closeCart()">×</button>
+    </div>
+
+    <div id="cartItems">
+        <p class="empty">Your cart is empty.</p>
+    </div>
+
+    <div class="cart-bottom">
+
+        <h3>
+            Total:
+            ₱<span id="cartTotal">0</span>
+        </h3>
+
+        <button onclick="checkout()" class="checkout">
+            Checkout
+        </button>
+
+    </div>
+
+</div>
+

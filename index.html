@@ -1,0 +1,318 @@
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GALLERY-CUNANAN</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:pink;
+}
+
+/* Navigation */
+nav{
+    background:darkred;
+    color:white;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 40px;
+}
+
+nav h2{
+    font-size:28px;
+}
+
+nav ul{
+    list-style:none;
+    display:flex;
+}
+
+nav ul li{
+    margin-left:25px;
+}
+
+nav ul li a{
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+nav ul li a:hover{
+    color:#DB6551 ;
+}
+
+/* Banner */
+
+.banner{
+    width:95%;
+    height:295x;
+    margin:25px auto;
+    overflow:hidden;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,.2);
+}
+
+.slider{
+    display:flex;
+    width:400%;
+    animation:slide 16s infinite;
+}
+
+.slider img{
+    width:25%;
+    height:320px;
+    object-fit:fill;
+
+}
+
+@keyframes slide{
+
+0%,20%{
+transform:translateX(0);
+}
+
+25%,45%{
+transform:translateX(-25%);
+}
+
+50%,70%{
+transform:translateX(-50%);
+}
+
+75%,100%{
+transform:translateX(-75%);
+}
+
+}
+
+/* Intro */
+
+.intro{
+    text-align:center;
+    padding:20px;
+}
+
+.intro h1{
+    color:#4a2c2a;
+}
+
+.intro p{
+    margin-top:10px;
+    color:#555;
+}
+
+
+/* About */
+
+.about{
+    background:white;
+    text-align:center;
+    padding:50px;
+}
+
+.about h2{
+    color:#4a2c2a;
+    margin-bottom:15px;
+}
+
+/* Contact */
+
+.contact{
+    padding:40px;
+    text-align:center;
+}
+
+.contact h2{
+    color:#4a2c2a;
+    margin-bottom:10px;
+}
+
+/* Footer */
+
+footer{
+    background:#4a2c2a;
+    color:white;
+    text-align:center;
+    padding:15px;
+}
+</style>
+
+</head>
+<body>
+
+<nav>
+  
+     
+<i><h2>Jiewel's</h2></i>
+
+<ul>
+<li><a href="D:\kate\CUNANAN PROJECT\index.html">Home</a></li>
+<li><a href="D:\kate\CUNANAN PROJECT\products.html">Products</a></li>
+<li><a href="D:\kate\CUNANAN PROJECT\about.html">About</a></li>
+<li><a href="D:\kate\CUNANAN PROJECT\contact.html">Contact</a></li>
+</ul>
+
+</nav>
+
+<!-- Banner -->
+
+<div class="banner">
+
+<div class="slider">
+
+<img src="D:\kate\3c6c3cd1-c0dd-46c3-a593-be80af6aa1d4.jpg">
+<img src="D:\kate\101.jpg">
+<img src="D:\kate\102.jpg">
+<img src="D:\kate\103.jpg">
+ 
+</div>
+
+</div>
+
+<div class="intro">
+
+<h1>OUR COLLECTION</h1>
+ 
+</div>
+<!-- SIMPLE PERFUME GALLERY -->
+
+<section class="perfume-gallery">
+
+    <h2>Perfume Gallery</h2>
+    <p>Discover our collection</p>
+
+    <div class="gallery-container">
+
+        <div class="gallery-card">
+            <img src="D:\kate\6fadef6e-b461-4b91-88c9-cd5ba85ed96e.jpg"alt="Perfume 1">
+            <h3>La Bomba</h3>
+        </div>
+
+        <div class="gallery-card">
+            <img src="D:\kate\3a5a7c74-b704-4865-bebe-953c22dc616b.jpg" alt="Perfume 2">
+            <h3>Valentino</h3>
+        </div>
+
+        <div class="gallery-card">
+            <img src="D:\kate\94e565a1-9ad3-4157-9e5a-da7ec1bc1833.jpg" alt="Perfume 3">
+            <h3>My Way</h3>
+        </div>
+
+        <div class="gallery-card">
+            <img src="D:\kate\1c247152-6a3e-4d84-ae10-133b3312335f.jpg" alt="Perfume 4">
+            <h3>Yara</h3>
+        </div>
+
+        <div class="gallery-card">
+            <img src="D:\kate\8a15b069-c765-4d08-98b1-315b1e12fbc1.jpg" alt="Perfume 5">
+            <h3>Barbie</h3>
+        </div>
+
+        <div class="gallery-card">
+            <img src="D:\kate\0a4075b8-2390-4ace-8f08-033b9cabb0d0.jpg" alt="Perfume 6">
+            <h3>Flower Knows</h3>
+        </div>
+         <div class="gallery-card">
+            <img src="D:\kate\3f0d64e2-7beb-4d5d-9452-751701a9bf6e.jpg" alt="Perfume 4">
+            <h3>Miss Velvet</h3>
+        </div>
+
+        <div class="gallery-card">
+            <img src="D:\kate\ffd3cfa0-a638-4818-8780-42e14572479c.jpg" alt="Perfume 5">
+            <h3>Gucci</h3>
+        </div>
+
+        <div class="gallery-card">
+            <img src="D:\kate\ee03cf8b-7324-4a16-bff0-235e53ea7a31.jpg" alt="Perfume 6">
+            <h3>Good Girl</h3>
+        </div>
+
+    </div>
+
+</section>
+
+<center>
+ 
+<video controls="controls" autoplay="autoplay" width="500px" height="300px"> 
+    <source src="D:\kate\42c6fd84-218f-4436-9a16-62e92bbfc624.mp4" type="video/mp4"> 
+     
+  Your browser does not support the video tag.
+
+</video>
+</center>
+<style>
+
+.perfume-gallery {
+    padding: 60px 7%;
+    text-align: center;
+    background: #faf7f3;
+}
+
+.perfume-gallery h2 {
+    font-family: Georgia, serif;
+    font-size: 40px;
+    color: #4b3425;
+}
+
+.perfume-gallery p {
+    color: #777;
+    margin: 10px 0 35px;
+}
+
+.gallery-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+.gallery-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px #00000015;
+    transition: 0.3s;
+}
+
+.gallery-card:hover {
+    transform: translateY(-7px);
+}
+
+.gallery-card img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    display: block;
+}
+
+.gallery-card h3 {
+    padding: 18px;
+    font-family: Georgia, serif;
+    color: #4b3425;
+}
+
+@media (max-width: 700px) {
+    .gallery-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 500px) {
+    .gallery-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+</style>
+  
